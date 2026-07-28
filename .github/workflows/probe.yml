@@ -1,0 +1,6 @@
+name: probe
+on: push
+jobs:
+  a:
+    runs-on: ubuntu-latest
+    steps: [{run: "true"}]
