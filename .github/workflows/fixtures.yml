@@ -1,0 +1,26 @@
+name: fixtures
+# Exists to produce, on demand, every check-run conclusion the GitHub
+# adapter tests pin: success, skipped, failure, cancelled and a run
+# still in progress. Nothing here builds or tests the repository.
+on: [push, pull_request]
+concurrency:
+  group: fixtures-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  green:
+    runs-on: ubuntu-latest
+    steps:
+      - run: "true"
+  never-runs:
+    if: ${{ false }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: "true"
+  red:
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 1
+  slow:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sleep 150
